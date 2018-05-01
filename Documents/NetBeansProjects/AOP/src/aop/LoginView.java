@@ -128,7 +128,6 @@ public class LoginView extends javax.swing.JFrame {
         txt_passwordLogin.setBackground(new java.awt.Color(32, 33, 35));
         txt_passwordLogin.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txt_passwordLogin.setForeground(new java.awt.Color(255, 255, 255));
-        txt_passwordLogin.setText("password");
         txt_passwordLogin.setBorder(null);
         txt_passwordLogin.setEchoChar('\u25CF');
         txt_passwordLogin.addActionListener(new java.awt.event.ActionListener() {
