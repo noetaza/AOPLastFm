@@ -11,6 +11,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -28,10 +29,27 @@ public class AlbumView extends javax.swing.JFrame {
     String BASE_URL = "https://api.genius.com";
     String CLIENT_ACCESS_TOKEN_GENIUS = "P0ScDQvCodEmWbEgK-X7IU8nTjYNEKYaKDPOEePZYE8glZZU17cq7fYgS7nQNDwR";
     String CLIENT_ACCESS_TOKEN_LASTFM = "dce1aee6815b747ce8c10528ac1091bb";
-    String ARTIST_NAME = "Ceremonials";
+    String ALBUM_NAME = "Ceremonials";
     String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; rv:40.0) Gecko/20100101 Firefox/40.0";
     
+    String []Tracks = {
+                        "Only If for a Night",
+                        "Shake It Out",
+                        "What the Water Gave Me",
+                        "Never Let Me Go",
+                        "Breaking Down",
+                        "Lover to Lover",
+                        "No Light, No Light",
+                        "Seven Devils",
+                        "Heartlines",
+                        "Spectrum",
+                        "All This and Heaven Too",
+                        "Leave My Body"
+                    };
+    
     int xx, xy;
+    
+    private ArrayList<JLabel> nameTrack;
     
     public AlbumView() {
         initComponents();
@@ -39,13 +57,33 @@ public class AlbumView extends javax.swing.JFrame {
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(0,0));
         jScrollPane2.getVerticalScrollBar().setPreferredSize(new Dimension(0,0));
         
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(15);
+        
         pnlHeader.setBackground(new Color(0,0,0,100));
         ImageIcon head = new ImageIcon(getClass().getResource("/images/header.jpg"));
         headerLabel.setIcon(scaleImageFill(head, headerLabel));
         
         loadImage("https://lastfm-img2.akamaized.net/i/u/300x300/3738ff515abf28ea87a7c949df8b9841.png", imgAlbum);
         
-        albumName.setText(ARTIST_NAME);
+        albumName.setText(ALBUM_NAME);
+        
+        int xal=40, yal=230;
+        int cy = 0;
+        for(int i=0; i<12; i++){
+            JLabel albImage = new JLabel();
+            JLabel albName = new JLabel();
+            
+            albName.setFont(new java.awt.Font("Century Gothic", 0, 20)); // NOI18N
+            String num = "" + (i+1);
+            albName.setText( num + " - " + Tracks[i]);
+            pnlAlbum.add(albName, new org.netbeans.lib.awtextra.AbsoluteConstraints(xal, yal + cy*30, 500, -1));
+            cy++;
+            
+            if( i>10 ) {
+                pnlAlbum.setPreferredSize(new Dimension(pnlAlbum.getWidth(), pnlAlbum.getHeight()+35));
+            }
+        }
+        
         this.repaint();
     }
 
@@ -135,7 +173,6 @@ public class AlbumView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(990, 590));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlTitlebar.setBackground(new java.awt.Color(0, 0, 0));
@@ -208,22 +245,22 @@ public class AlbumView extends javax.swing.JFrame {
 
         tracklist.setFont(new java.awt.Font("Arvo", 0, 24)); // NOI18N
         tracklist.setText("Tracklist");
-        pnlAlbum.add(tracklist, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        pnlAlbum.add(tracklist, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
-        pnlLyrics.setBackground(new java.awt.Color(245, 245, 245));
+        pnlLyrics.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout pnlLyricsLayout = new javax.swing.GroupLayout(pnlLyrics);
         pnlLyrics.setLayout(pnlLyricsLayout);
         pnlLyricsLayout.setHorizontalGroup(
             pnlLyricsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 430, Short.MAX_VALUE)
         );
         pnlLyricsLayout.setVerticalGroup(
             pnlLyricsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 350, Short.MAX_VALUE)
         );
 
-        pnlAlbum.add(pnlLyrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 200, 460, 350));
+        pnlAlbum.add(pnlLyrics, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 200, 430, 350));
 
         jScrollPane2.setViewportView(pnlAlbum);
 

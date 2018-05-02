@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
 /**
@@ -38,13 +39,37 @@ public class ArtistView extends javax.swing.JFrame {
     String ARTIST_NAME = "Florence + the Machine";
     String USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; rv:40.0) Gecko/20100101 Firefox/40.0";
     
+    String [][] Albums = {
+                            {"Lungs", "https://lastfm-img2.akamaized.net/i/u/300x300/106be5811438488ac867580c71a54003.png"},
+                            {"Ceremonials", "https://lastfm-img2.akamaized.net/i/u/300x300/3738ff515abf28ea87a7c949df8b9841.png"},
+                            {"How Big, How Blue, How Beautiful", "https://lastfm-img2.akamaized.net/i/u/300x300/feb42360343e89abe46bc03224e7748a.png"},
+                            {"Final Fantasy XV", "https://lastfm-img2.akamaized.net/i/u/300x300/79a962a4fc96e48eb2209e6b28fee91d.png"},
+                            {"Wish That You Were Here (From “Miss Peregrine’s Home For Peculiar Children” Original Motion Picture Soundtrack)", "https://lastfm-img2.akamaized.net/i/u/300x300/f0a05d7bd26299b3526aa550c583056c.png"},
+                            {"MTV Presents Unplugged: Florence + The Machine (Deluxe Version)", "https://lastfm-img2.akamaized.net/i/u/300x300/df4c16d6da64464f9a3d6a8bd33246cb.png"},
+                            {"Dog Days Are Over - Single", "https://lastfm-img2.akamaized.net/i/u/300x300/284d308937364b13b53e5d8e8fd38f8a.png"},
+                            {"Shake It Out", "https://lastfm-img2.akamaized.net/i/u/300x300/884c3f2632a0419c8f81595820d7bb3a.png"},
+                            {"Lover To Lover", "https://lastfm-img2.akamaized.net/i/u/300x300/b6ab13f45b6740ea918cc9458fafa121.png"},
+                            {"The Twilight Saga: Eclipse", "https://lastfm-img2.akamaized.net/i/u/300x300/baa9589eb3714e83927ee7dd6c00ced3.png"},
+                            {"A Lot of Love, a Lot of Blood", "https://lastfm-img2.akamaized.net/i/u/300x300/59dbe751df3d41caa3a5651bc0e5ecce.png"},
+                            {"Sky Full Of Song", "https://lastfm-img2.akamaized.net/i/u/300x300/4605472bfb025cc1029f1891c2e7d3ac.png"},
+                            {"Spectrum (Say My Name) EP", "https://lastfm-img2.akamaized.net/i/u/300x300/2901d7d722db4fe98481a2d1585c933a.png"}
+                        };
+    
     int xx, xy;
+    
+    private ArrayList<JLabel> albumArtist;
+    private ArrayList<JLabel> nameAlbum;
     
     public ArtistView(){
         initComponents();
         
         jScrollPane1.getVerticalScrollBar().setPreferredSize(new Dimension(0,0));
         jScrollPane2.getVerticalScrollBar().setPreferredSize(new Dimension(0,0));
+        
+        jScrollPane2.getVerticalScrollBar().setUnitIncrement(15);
+        
+        //albumArtist = new ArrayList<>();
+        //nameAlbum = new ArrayList<>();
         
         pnlHeader.setBackground(new Color(0,0,0,100));
         ImageIcon head = new ImageIcon(getClass().getResource("/images/header.jpg"));
@@ -53,6 +78,26 @@ public class ArtistView extends javax.swing.JFrame {
         loadImage("https://lastfm-img2.akamaized.net/i/u/300x300/e79b23131749eab7d7057808c6f3e53a.png", imgArtist);
         
         artistName.setText(ARTIST_NAME);
+        
+        int xal=30, yal=240;
+        int cx = 0, cy = 0;
+        for(int i=0; i<13; i++){
+            JLabel albImage = new JLabel();
+            JLabel albName = new JLabel();
+            
+            albName.setFont(new java.awt.Font("Arvo", 0, 14)); // NOI18N
+            albName.setText(Albums[i][0]);
+            pnlArtist.add(albName, new org.netbeans.lib.awtextra.AbsoluteConstraints(xal + cx*225 , yal + 200 + cy*230, 200, -1));
+            
+            albImage.setSize(new Dimension(200, 200));
+            albImage.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+            loadImage(Albums[i][1], albImage);
+
+            pnlArtist.add(albImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(xal + cx*225, yal + cy*230, 200, 200));
+            cx++;
+            if(cx%4 == 0){cx = 0; cy ++; pnlArtist.setPreferredSize(new Dimension(pnlArtist.getWidth(), pnlArtist.getHeight()+ 200 + (cy-1)*220));}
+        }
+        
         this.repaint(); 
         
         //String ArtistID = getArtistID(ARTIST_NAME);
@@ -279,6 +324,8 @@ public class ArtistView extends javax.swing.JFrame {
         jScrollPane2.setPreferredSize(new java.awt.Dimension(900, 560));
 
         pnlArtist.setBackground(new java.awt.Color(247, 247, 247));
+        pnlArtist.setMinimumSize(new java.awt.Dimension(990, 560));
+        pnlArtist.setPreferredSize(new java.awt.Dimension(990, 560));
         pnlArtist.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlHeader.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
