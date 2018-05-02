@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aop;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -21,10 +12,6 @@ import javax.swing.JLabel;
  */
 public class RegisterView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form RegisterView
-     */
-    
     int xx, xy;
     
     public RegisterView() {

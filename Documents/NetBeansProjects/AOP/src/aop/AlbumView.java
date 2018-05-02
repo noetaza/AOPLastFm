@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package aop;
 
 import java.awt.Color;
@@ -22,10 +17,6 @@ import javax.swing.JLabel;
  */
 public class AlbumView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AlbumView
-     */
-    
     String BASE_URL = "https://api.genius.com";
     String CLIENT_ACCESS_TOKEN_GENIUS = "P0ScDQvCodEmWbEgK-X7IU8nTjYNEKYaKDPOEePZYE8glZZU17cq7fYgS7nQNDwR";
     String CLIENT_ACCESS_TOKEN_LASTFM = "dce1aee6815b747ce8c10528ac1091bb";
